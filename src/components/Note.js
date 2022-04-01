@@ -1,16 +1,16 @@
 import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 
-const Notes = () => {
+const Note = ({text,date}) => {
     return (
         <div className="note">
-            <span>Hey, c'est t'as première note ! Hourraaa </span>
+            <span>{text}</span>
             <div className="note-footer">
-                <small>13/04/2021</small>
+                <small>{date}</small>
                 <MdDeleteForever className="delete-icons" size='1.3em'/>
             </div>
         </div>
     );
 };
 
-export default Notes;
+export default Note;
