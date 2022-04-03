@@ -1,17 +1,19 @@
-import React,{useState} from 'react';
-
+import React, {useState} from 'react';
 
 
 const AddNotes = ({handleAddNote}) => {
 
-    const [noteText,setNoteText] = useState('');
+    const [noteText, setNoteText] = useState('');
+    const remaining = 200;
 
     const handleChange = (e) => {
-        setNoteText(e.target.value);
+        if (e.target.value.length <= 200) {
+            setNoteText(e.target.value);
+        }
     }
 
     const handleSaveClick = () => {
-        if(noteText.trim().length > 1){
+        if (noteText.trim().length > 1) {
             handleAddNote(noteText)
             setNoteText('')
         }
@@ -26,10 +28,10 @@ const AddNotes = ({handleAddNote}) => {
                 cols='10'
                 placeholder='Ajoute une note 😀'
             />
-                <div className="note-footer">
-                    <small>200 mot encore..</small>
-                    <button className="save" onClick={handleSaveClick}>Save</button>
-                </div>
+            <div className="note-footer">
+                <small>{remaining - noteText.length} mot encore..</small>
+                <button className="save" onClick={handleSaveClick}>Save</button>
+            </div>
         </div>
     );
 };
