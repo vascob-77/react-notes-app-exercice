@@ -2,6 +2,7 @@ import NotesList from "./components/NotesList";
 import {useState} from "react";
 import {nanoid} from 'nanoid'
 import Search from "./components/Search";
+import Header from "./components/Header";
 
 function App() {
 
@@ -24,7 +25,9 @@ function App() {
         },
     ])
 
-    const [searchText,setSearchText] = useState('');
+    const [searchText, setSearchText] = useState('');
+
+    const [darkMode, setDarkMode] = useState(false);
 
     const handleAddNote = (text) => {
         const date = new Date();
@@ -43,14 +46,18 @@ function App() {
         setNotes(newNote)
     }
 
-    const searchNote = (searchText) => {
-        setSearchText(searchText)
-    }
+    // const handleSearchNote = (searchText) => {
+    //     setSearchText(searchText)
+    // }
 
     return (
-        <div className="App">
-            <Search searchNote={searchNote}/>
-            <NotesList notes={notes.filter((note) => note.text.toLocaleString().includes(searchText))} handleAddNote={handleAddNote} handleDeleteNote={handleDeleteNote}/>
+        <div className={`${darkMode && 'dark-mode'}`}>
+            <div className="App">
+                <Header handleToggleDarkMode={setDarkMode}/>
+                <Search handleSearchNote={setSearchText}/>
+                <NotesList notes={notes.filter((note) => note.text.toLocaleString().includes(searchText))}
+                           handleAddNote={handleAddNote} handleDeleteNote={handleDeleteNote}/>
+            </div>
         </div>
     );
 }
